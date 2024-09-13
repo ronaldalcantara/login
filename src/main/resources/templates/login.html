@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+        }
+        .row {
+            width: 400px;
+            margin: 0 auto;
+        }
+        .containerButton {
+          display: flex;
+          justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <form class="col s8" th:action="@{/login}" method="post">
+        <h4>Login</h4>
+        <div class="row">
+            <div class="input-field col s8">
+                <input id="username" name="username" type="text" class="validate" required>
+                <label for="username">Username</label>
+            </div>
+            <div class="input-field
+ col s8">
+                <input id="password" name="password" type="password" class="validate" required>
+                <label for="password">Password</label>
+            </div>
+            <div class="input-field col s8">
+                <div class="containerButton">
+                    <button class="btn waves-effect waves-light material-icons right" type="submit" name="action" >Entrar</button>
+                </div>
+            </div>
+        </div>
+        <div th:if="${error}" class="red-text">
+            <p th:text="${error}"></p>
+        </div>
+        <p>Não tem uma conta? <a th:href="@{/register}">Registre-se aqui</a></p>
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
