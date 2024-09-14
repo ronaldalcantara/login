@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
@@ -20,3 +23,19 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  global:
+    scrape_interval: 15s
+  scrape_configs:
+    - job_name: 'app-login'
+      metrics_path: '/actuator/prometheus'
+      static_configs:
+        - targets: [ 'localhost:8080' ]
