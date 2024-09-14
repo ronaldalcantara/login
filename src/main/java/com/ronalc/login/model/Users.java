@@ -1,18 +1,16 @@
 package com.ronalc.login.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "usuarios")
 public class Users {
     @Id
@@ -22,4 +20,9 @@ public class Users {
     private String username;
     @Column(name = "senha")
     private String password;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    public Users(String username, String encryptedPassword) {
+    }
 }
