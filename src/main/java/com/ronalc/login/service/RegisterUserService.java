@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RegisterUserService {
+
     private final UserRepository userRepository;
 
     public RegisterUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public void register(String username, String password) {
         String encryptedPassword = PasswordUtils.encryptPassword(password);
-        userRepository.save(new Users(username, encryptedPassword));
+        Users user = new Users(username, encryptedPassword);
+        userRepository.save(user);
     }
 }
