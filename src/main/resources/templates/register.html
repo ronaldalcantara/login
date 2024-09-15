@@ -38,7 +38,11 @@
     <div th:if="${error}" class="red-text">
         <p th:text="${error}"></p>
     </div>
-    <p>Já tem uma conta? <a th:href="@{/login}">Faça login aqui</a></p>
+    <div th:if="${success}" th:utext="${success}" class="alert alert-success"></div>
+
+    <p th:unless="${success}">
+        Já tem uma conta? <a th:href="@{/login}">Faça login aqui</a>
+    </p>
 </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

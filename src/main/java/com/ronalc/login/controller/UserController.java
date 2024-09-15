@@ -50,7 +50,8 @@ public class UserController {
                                   Model model) {
         return Try.of(() -> {
                     registerUserService.register(username, password);
-                    return "redirect:/login";
+                    model.addAttribute("success", "Usuário registrado com sucesso! <a href='/login'>Clique aqui para fazer login</a>");
+                    return "register"; // Mantém na página de registro com mensagem de sucesso
                 })
                 .recover(Exception.class, e -> {
                     model.addAttribute("error", "Erro ao registrar usuário");
