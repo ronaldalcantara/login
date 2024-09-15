@@ -1,11 +1,9 @@
 package com.ronalc.login.service;
 
-import com.ronalc.login.model.Users;
 import com.ronalc.login.repository.UserRepository;
 import com.ronalc.login.util.PasswordUtils;
+import io.vavr.control.Option;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class LoginService {
@@ -14,9 +12,12 @@ public class LoginService {
     public LoginService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public boolean login(String username, String password) {
         String encryptedPassword = PasswordUtils.encryptPassword(password);
-        Optional<Users> user = userRepository.findByUsername(username);
-        return user.map(u -> u.getPassword().equals(encryptedPassword)).orElse(false);
+
+        return Option.ofOptional(userRepository.findByUsername(username))
+                .map(user -> user.getPassword().equals(encryptedPassword))
+                .getOrElse(false);
     }
 }
